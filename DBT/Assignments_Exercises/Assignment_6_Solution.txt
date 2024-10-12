@@ -1,0 +1,21 @@
+1.
+mysql> select *from orders
+    -> where odate="1990-10-3";
+mysql> select *from orders
+    -> where odate="1990-10-4";
+
+2.
+mysql> select * from customers
+    -> where snum=1001 or snum=1004;
+
+3.
+mysql> select * from customers
+    -> where  cname like 'A%' or cname like 'G%';
+
+4.
+mysql> select * from customers
+    -> where  cname like 'C%' ;
+
+5.
+mysql> select * from orders
+    -> where NOT(amt=0 and amt=null);
