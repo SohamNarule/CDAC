@@ -1,0 +1,80 @@
+1.
+mysql> select onum ,cname from orders,customers
+    -> where orders.cnum=customers.cnum;
++------+----------+
+| onum | cname    |
++------+----------+
+| 3001 | Cisneros |
+| 3003 | Hoffman  |
+| 3002 | Pereira  |
+| 3005 | Liu      |
+| 3006 | Cisneros |
+| 3009 | Giovanni |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+
+
+2.
+mysql> select sname,cname,onum from customers,orders,salespeople
+    -> where salespeople.snum=customers.snum and salespeople.snum=orders.snum
+    -> order by 1;
++---------+----------+------+
+| sname   | cname    | onum |
++---------+----------+------+
+| Axelord | Giovanni | 3009 |
+| Motika  | Pereira  | 3002 |
+| Peel    | Hoffman  | 3011 |
+| Peel    | Hoffman  | 3008 |
+| Peel    | Hoffman  | 3003 |
+| Peel    | Clemens  | 3011 |
+| Peel    | Clemens  | 3008 |
+| Peel    | Clemens  | 3003 |
+| Rifkin  | Cisneros | 3006 |
+| Rifkin  | Cisneros | 3001 |
+| Serres  | Liu      | 3010 |
+| Serres  | Liu      | 3007 |
+| Serres  | Liu      | 3005 |
+| Serres  | Grass    | 3010 |
+| Serres  | Grass    | 3007 |
+| Serres  | Grass    | 3005 |
++---------+----------+------+
+
+3.
+mysql> select sname,cname,comm from customers,salespeople
+    -> where comm>0.12
+    -> order by 1;
++--------+----------+------+
+| sname  | cname    | comm |
++--------+----------+------+
+| Rifkin | Hoffman  | 0.15 |
+| Rifkin | Giovanni | 0.15 |
+| Rifkin | Liu      | 0.15 |
+| Rifkin | Grass    | 0.15 |
+| Rifkin | Clemens  | 0.15 |
+| Rifkin | Cisneros | 0.15 |
+| Rifkin | Pereira  | 0.15 |
+| Serres | Hoffman  | 0.13 |
+| Serres | Giovanni | 0.13 |
+| Serres | Liu      | 0.13 |
+| Serres | Grass    | 0.13 |
+| Serres | Clemens  | 0.13 |
+| Serres | Cisneros | 0.13 |
+| Serres | Pereira  | 0.13 |
++--------+----------+------+
+
+4.
+mysql> select sname, sum(comm) from salespeople,orders,customers
+    -> where rating>100
+    -> group by sname ;
++---------+-----------+
+| sname   | sum(comm) |
++---------+-----------+
+| Axelord |      4.00 |
+| Rifkin  |      6.00 |
+| Motika  |      4.40 |
+| Serres  |      5.20 |
+| Peel    |      4.80 |
++---------+-----------+
+
