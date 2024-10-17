@@ -1,0 +1,57 @@
+1.
+mysql> select onum ,orders.snum,salespeople.comm from orders,salespeople
+    -> where orders.snum=salespeople.snum;
++------+------+------+
+| onum | snum | comm |
++------+------+------+
+| 3001 | 1007 | 0.15 |
+| 3003 | 1001 | 0.12 |
+| 3002 | 1004 | 0.11 |
+| 3005 | 1002 | 0.13 |
+| 3006 | 1007 | 0.15 |
+| 3009 | 1003 | 0.10 |
+| 3007 | 1002 | 0.13 |
+| 3008 | 1001 | 0.12 |
+| 3010 | 1002 | 0.13 |
+| 3011 | 1001 | 0.12 |
++------+------+------+
+
+
+2.
+mysql> select city ,max(rating) from customers
+    -> group by city;
++----------+-------------+
+| city     | max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+
+3.
+mysql> select rating , cname,cnum from customers order by rating desc;
++--------+----------+------+
+| rating | cname    | cnum |
++--------+----------+------+
+|    300 | Grass    | 2004 |
+|    300 | Cisneros | 2008 |
+|    200 | Giovanni | 2002 |
+|    200 | Liu      | 2003 |
+|    100 | Hoffman  | 2001 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
++--------+----------+------+
+
+4.
+mysql> select odate,count(onum) from orders
+    -> group by odate
+    -> order by 2 desc;
++------------+-------------+
+| odate      | count(onum) |
++------------+-------------+
+| 1990-10-03 |           5 |
+| 1990-10-04 |           2 |
+| 1990-10-06 |           2 |
+| 1990-10-05 |           1 |
++------------+-------------+

@@ -1,0 +1,71 @@
+1.
+mysql> select count(*) "3 Oct " from orders
+    -> where odate ='1990-10-03';
++--------+
+| 3 Oct  |
++--------+
+|      5 |
++--------+
+
+2.
+mysql> select count(city) from customers;
++-------------+
+| count(city) |
++-------------+
+|           7 |
++-------------+
+
+3.
+mysql> select cname,min(amt) from orders,customers
+    -> where orders.cnum=customers.cnum
+    -> group by cname
+    -> order by 2;
++----------+----------+
+| cname    | min(amt) |
++----------+----------+
+| Cisneros |    18.69 |
+| Grass    |    75.75 |
+| Hoffman  |   767.19 |
+| Giovanni |  1713.23 |
+| Pereira  |  1900.10 |
+| Clemens  |  4723.00 |
+| Liu      |  5160.45 |
++----------+----------+
+
+4.
+mysql> select cname from customers
+    -> where cname like 'G%'
+    -> order by 1;
++----------+
+| cname    |
++----------+
+| Giovanni |
+| Grass    |
++----------+
+
+5.
+mysql> select city ,max(rating) from customers
+    -> group by city;
++----------+-------------+
+| city     | max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+
+6.
+mysql> select count(distinct snum) as "Unique Customers" ,odate from orders
+
+    -> group by odate
+    -> order by odate;
++------------------+------------+
+| Unique Customers | odate      |
++------------------+------------+
+|                4 | 1990-10-03 |
+|                2 | 1990-10-04 |
+|                1 | 1990-10-05 |
+|                2 | 1990-10-06 |
++------------------+------------+
+
