@@ -1,0 +1,51 @@
+1.
+mysql> select cname,city,rating,'High rating' as 'Status' from customers whe
+re rating>='200'
+    -> union
+    -> select cname,city,rating,'Low rating' as 'Low' from customers where rating<'200';
++----------+----------+--------+-------------+
+| cname    | city     | rating | Status      |
++----------+----------+--------+-------------+
+| Giovanni | Rome     |    200 | High rating |
+| Liu      | San Jose |    200 | High rating |
+| Grass    | Berlin   |    300 | High rating |
+| Cisneros | San Jose |    300 | High rating |
+| Hoffman  | London   |    100 | Low rating  |
+| Clemens  | London   |    100 | Low rating  |
+| Pereira  | Rome     |    100 | Low rating  |
++----------+----------+--------+-------------+
+
+
+2.
+mysql> select sname ,snum from salespeople union select cname,cnum from customers where cnum in (select cnum from orders group by cnum having count(cnum)>1);
++----------+------+
+| sname    | snum |
++----------+------+
+| Peel     | 1001 |
+| Serres   | 1002 |
+| Motika   | 1004 |
+| Rifkin   | 1007 |
+| Axelord  | 1003 |
+| Grass    | 2004 |
+| Clemens  | 2006 |
+| Cisneros | 2008 |
++----------+------+
+
+3.
+mysql> select snum from salespeople where city='San Jose'
+    -> union
+    -> select cnum from customers where snum in( select snum from salespeople where city = 'San Jose')
+    -> union
+    -> select onum from orders where odate='1990-10-03';
++------+
+| snum |
++------+
+| 1002 |
+| 2003 |
+| 2004 |
+| 3001 |
+| 3003 |
+| 3002 |
+| 3005 |
+| 3006 |
++------+

@@ -1,0 +1,19 @@
+1.
+mysql> select A.sname ,B.sname ,A.city as City from salespeople A,salespeople B
+    -> where A.city =B.city and A.sname>B.sname;
++-------+--------+--------+
+| sname | sname  | City   |
++-------+--------+--------+
+| Peel  | Motika | London |
++-------+--------+--------+
+
+2.
+mysql> select cname,city from customers
+    -> where customers.rating=(select rating from customers where cname='Hoffman');
++---------+--------+
+| cname   | city   |
++---------+--------+
+| Hoffman | London |
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+

@@ -1,0 +1,57 @@
+1.
+mysql> select cname,rating from customers where rating>= any (select rating from customers where snum in (select snum from salespeople where sname = 'Serres'));
++----------+--------+
+| cname    | rating |
++----------+--------+
+| Giovanni |    200 |
+| Liu      |    200 |
+| Grass    |    300 |
+| Cisneros |    300 |
++----------+--------+
+
+2.
+mysql> select sname from salespeople where not city = any(select city from c
+ustomers);
++---------+
+| sname   |
++---------+
+| Rifkin  |
+| Axelord |
++---------+
+
+3.
+mysql> select onum,amt from orders where amt > any (select Amt from orders w
+here snum in(select snum from salespeople where city ='London'));
++------+---------+
+| onum | amt     |
++------+---------+
+| 3002 | 1900.10 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3008 | 4723.00 |
+| 3010 | 1309.95 |
+| 3011 | 9891.88 |
++------+---------+
+
+4.
+Using min :
+mysql> select onum,amt from orders where amt > any (select min(Amt) from ord
+ers where snum in(select snum from salespeople where city ='London'));
++------+---------+
+| onum | amt     |
++------+---------+
+| 3002 | 1900.10 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3008 | 4723.00 |
+| 3010 | 1309.95 |
+| 3011 | 9891.88 |
++------+---------+
+
+Using max :
+mysql> select onum,amt from orders where amt > any (select max(Amt) from ord
+ers where snum in(select snum from salespeople where city ='London'));
+
+--> Empty set
