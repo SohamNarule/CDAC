@@ -1,0 +1,99 @@
+1.
+mysql> select concat(Upper(substr(Sname,1,1)),substr(sname,2)) as Sname from
+ supplier;
++----------+
+| Sname    |
++----------+
+| Oriva    |
+| Crompton |
+| Usha     |
++----------+
+
+2.
+mysql> select upper(sname) from supplier;
++--------------+
+| upper(sname) |
++--------------+
+| ORIVA        |
+| CROMPTON     |
+| USHA         |
++--------------+
+
+3.
+mysql> select Lower(sname) from supplier;
++--------------+
+| Lower(sname) |
++--------------+
+| oriva        |
+| crompton     |
+| usha         |
++--------------+
+
+4.
+mysql> select Lpad(sname,25,' ') from supplier;
++---------------------------+
+| Lpad(sname,25,' ')        |
++---------------------------+
+|                     oriva |
+|                  crompton |
+|                      usha |
++---------------------------+
+
+5.
+mysql> select replace(sname,'la','ro') from supplier;
++--------------------------+
+| replace(sname,'la','ro') |
++--------------------------+
+| oriva                    |
+| crompton                 |
+| rota                     |
++--------------------------+
+
+6.
+mysql> select replace(replace(sname,'l','r'),'a','o') as updated from suppli
+er;
++----------+
+| updated  |
++----------+
+| orivo    |
+| crompton |
+| roto     |
++----------+
+
+7.
+mysql> select sname , length(sname) from supplier;
++----------+---------------+
+| sname    | length(sname) |
++----------+---------------+
+| oriva    |             5 |
+| crompton |             8 |
+| lata     |             4 |
++----------+---------------+
+
+8.
+mysql> select sname from supplier where soundex(sname)=soundex('bloke');
++-------+
+| sname |
++-------+
+| blk   |
++-------+
+
+9.
+mysql> select case when status = 10 then 'Ten'
+    -> when status = 20 then 'Twenty'
+    -> when status = 30 then 'Thirty' end new_Status ,sname from supplier;
++------------+----------+
+| new_Status | sname    |
++------------+----------+
+| Ten        | blk      |
+| Twenty     | crompton |
+| Thirty     | lata     |
++------------+----------+
+
+10.
+mysql> select dayname(sysdate()) ;
++--------------------+
+| dayname(sysdate()) |
++--------------------+
+| Sunday             |
++--------------------+

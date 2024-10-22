@@ -1,0 +1,96 @@
+1.
+--> 
+create table rect(perimeter int, area int);
+Delimiter //
+create procedure periarea(l int, w int)
+begin
+	declare peri int default 0;
+	declare area int default 0;
+	set peri=2*(l+w);
+	set area=l*w;
+	insert into rect(perimeter,area) values(peri,area);
+end; // 
+Delimiter ;
+select * from rect; 
+
+
+
+2.
+-->
+create table Square_Cube(Sq int ,cu int);
+Delimiter //
+create procedure Sq_Cube(num int)
+begin 
+declare Sq int;
+declare Cu int;
+set Sq=num*num;
+set Cu=num*num*num;
+insert into Square_Cube(Sq ,cu) values(Sq, Cu);
+end//
+Delimiter ;
+mysql> call Sq_Cube(5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Square_Cube;
++------+------+
+| Sq   | cu   |
++------+------+
+|   25 |  125 |
++------+------+
+
+
+3.
+Delimiter //
+create procedure Temp(C float)
+begin
+	declare F float;
+	set F=9/5*C+32;
+	set C=(F-32)*5/9;
+	insert into Square_Cube(Sq ,cu) values (C,F);
+end; //
+Delimiter ;
+mysql> call Temp(50);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Square_Cube;
++------+------+
+| Sq   | cu   |
++------+------+
+|   25 |  125 |
+|   25 |  125 |
+|  100 | 1000 |
+|   50 |  122 |
++------+------+
+
+4.
+create table Distance(Yard int,Foot int,Inch int);
+Delimiter //
+create procedure Inch_Convart(num int)
+begin
+	declare Y int;
+	declare F int;
+	declare I int;
+	set  Y=num/36;             
+	set  F=mod(num,36)/12;      
+	set  I=mod(mod(num,36),12);  
+	insert into Distance(Yard,Foot,Inch) values(Y,F,I);
+end; //
+Delimiter ;
+mysql> select * from Distance;
++------+------+------+
+| Yard | Foot | Inch |
++------+------+------+
+|    3 |    1 |    4 |
+|    4 |    1 |    6 |
+|   28 |    2 |    4 |
++------+------+------+
+
+
+
+
+
+
+
+
+
+	
